@@ -1,6 +1,7 @@
-# Hugging Face Spaces (Docker SDK) image for the FastAPI backend.
+# Portable image for the FastAPI backend: works on Render, Hugging Face Spaces
+# and any other Docker host.
 #
-# The space root is the repository root, so the app lives under backend/ and is
+# The repo root is the build context, so the app lives under backend/ and is
 # copied into place at build time.
 FROM python:3.12-slim
 
@@ -31,6 +32,8 @@ ENV APP_ENV=production \
     UPLOAD_DIR=/app/temp/uploads \
     OUTPUT_DIR=/app/temp/outputs
 
-EXPOSE 7860
+# Hugging Face Spaces expects 7860; Render injects its own $PORT. Honour
+# whatever the platform provides and fall back to 7860 when it does not.
+EXPOSE 7860 10000
 
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860", "--timeout-keep-alive", "75"]
+CMD ["sh", "-c", "python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-7860} --timeout-keep-alive 75"]
