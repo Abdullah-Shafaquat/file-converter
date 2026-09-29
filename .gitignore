@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Temp conversion storage
+backend/temp/*
+!backend/temp/uploads/
+!backend/temp/outputs/
+backend/temp/uploads/*
+backend/temp/outputs/*
+!backend/temp/uploads/.gitkeep
+!backend/temp/outputs/.gitkeep
+
+# Generated test output
+backend/tests/e2e/
+
+# Node
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

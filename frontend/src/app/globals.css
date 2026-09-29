@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+@layer base {
+  html {
+    /* Guarantees no horizontal scroll at 320px and up. */
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #fafafa;
+    color: #18181b;
+    /* iOS Safari zooms inputs under 16px; keep form controls at 16px. */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Never let a wide table or long filename create a horizontal scrollbar. */
+  #converter,
+  #formats,
+  #how-it-works {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline-offset: 2px;
+  }
+
+  /* Respect reduced-motion for the progress bar and hover transforms. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
